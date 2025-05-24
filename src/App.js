@@ -21,7 +21,7 @@ export default function App() {
     setAlias(savedAlias);
 
     socket.on('chat message', (msg) => {
-      setMessages((prev) => [...prev, msg]);
+      setMessages((prev) => [msg, ...prev]);
     });
 
     return () => {
@@ -83,7 +83,7 @@ export default function App() {
           </div>
         )}
 
-        <div className="flex-1 overflow-y-scroll bg-[#111] rounded-lg p-6 space-y-4 border border-green-700 shadow-inner">
+        <div ref={messageContainerRef} className="flex-1 overflow-y-scroll flex flex-col-reverse bg-[#111] rounded-lg p-6 space-y-4 border border-green-700 shadow-inner">
           {messages.map((msg) => (
             <div key={msg.id} className="flex items-start space-x-4">
               <div className="w-10 h-10 bg-green-500 text-black rounded-full flex items-center justify-center text-xl font-extrabold">
